@@ -1,0 +1,142 @@
+// LifeOS Prisma schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  username     String    @unique
+  displayName  String
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  identityProfile IdentityProfile?
+  entries         Entry[]
+  feedbacks       Feedback[]
+  goals           Goal[]
+  quests          Quest[]
+  reflections     Reflection[]
+}
+
+model IdentityProfile {
+  id              Int      @id @default(autoincrement())
+  userId          Int      @unique
+  identityStatement String
+  visionMvp       String
+  antiVision      String
+  constraints     String? // JSON string or markdown list
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Entry {
+  id               Int       @id @default(autoincrement())
+  userId           Int
+  entryDate        DateTime  @default(now())
+  title            String
+  narrative        String
+  identityStatement String?
+  antiVision       String?
+  microAction      String?
+  alignmentScore   Int?
+  energyScore      Int?
+  moodScore        Int?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  user      User     @relation(fields: [userId], references: [id])
+  feedbacks Feedback[]
+}
+
+model Feedback {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  entryId      Int
+  summary      String
+  correction   String
+  nextAction   String
+  severity     FeedbackSeverity @default(NORMAL)
+  createdAt    DateTime @default(now())
+
+  user   User  @relation(fields: [userId], references: [id])
+  entry  Entry @relation(fields: [entryId], references: [id])
+}
+
+model Goal {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  title       String
+  description String?
+  targetDate  DateTime?
+  status      GoalStatus @default(ACTIVE)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  quests Quest[]
+}
+
+model Quest {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  parentGoalId Int?
+  title       String
+  description String?
+  level       QuestLevel
+  dueDate     DateTime?
+  status      QuestStatus @default(ACTIVE)
+  xp          Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  parentGoal Goal? @relation(fields: [parentGoalId], references: [id])
+}
+
+model Reflection {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  entryDate DateTime @default(now())
+  aliveMoments String
+  numbMoments  String
+  enemyInsight String
+  nextIntent  String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum FeedbackSeverity {
+  NORMAL
+  WARNING
+  CRITICAL
+}
+
+enum GoalStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum QuestLevel {
+  YEAR
+  MONTH
+  DAY
+}
+
+enum QuestStatus {
+  ACTIVE
+  DONE
+  SKIPPED
+}
