@@ -29,8 +29,8 @@ const allowedAttributes: sanitizeHtml.IOptions['allowedAttributes'] = {
   td: ['align'],
 }
 
-export const renderMarkdown = (source: string): string => {
-  const raw = marked.parse(source, { breaks: true })
+export const renderMarkdown = async (source: string): Promise<string> => {
+  const raw = await marked.parse(source, { breaks: true })
 
   return sanitizeHtml(raw, {
     allowedTags,

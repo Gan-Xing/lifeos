@@ -12,10 +12,10 @@ export default async function VisionPage() {
 
   try {
     visionText = await fs.readFile(visionPath, 'utf8')
-    visionHtml = renderMarkdown(visionText)
+    visionHtml = await renderMarkdown(visionText)
   } catch {
     visionText = '未找到 PRODUCT_VISION.md，请确认 docs/PRODUCT_VISION.md 是否存在。'
-    visionHtml = renderMarkdown(visionText)
+    visionHtml = await renderMarkdown(visionText)
   }
 
   return (

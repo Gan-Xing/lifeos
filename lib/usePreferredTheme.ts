@@ -36,6 +36,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     if (typeof window === 'undefined') return
     const stored = window.localStorage.getItem(STORAGE_KEY)
     const next = resolveTheme(stored)
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(next)
     setHydrated(true)
   }, [])

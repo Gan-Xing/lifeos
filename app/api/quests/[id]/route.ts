@@ -4,13 +4,14 @@ import { getSessionUser } from '@/lib/server/authSession'
 import { prisma } from '@/lib/prisma'
 import { questUpdateSchema } from '@/lib/validators/quest'
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getSessionUser()
   if (!session) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
   }
 
-  const questId = Number(params.id)
+  const { id } = await params
+  const questId = Number(id)
   if (!Number.isInteger(questId)) {
     return NextResponse.json({ message: 'Invalid id' }, { status: 400 })
   }

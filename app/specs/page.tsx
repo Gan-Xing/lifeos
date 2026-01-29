@@ -12,10 +12,10 @@ export default async function SpecsPage() {
 
   try {
     specsText = await fs.readFile(specsPath, 'utf8')
-    specsHtml = renderMarkdown(specsText)
+    specsHtml = await renderMarkdown(specsText)
   } catch {
     specsText = '未找到 PRODUCT_REQUIREMENTS.md，请确认 docs/PRODUCT_REQUIREMENTS.md 是否存在。'
-    specsHtml = renderMarkdown(specsText)
+    specsHtml = await renderMarkdown(specsText)
   }
 
   return (
