@@ -91,7 +91,7 @@ export default function HomePage() {
               </h1>
               <div className="fade-rise delay-2 badge-core">
                 <span aria-hidden />
-                Identity Core
+                {copy.hero.badge}
               </div>
               <p className="fade-rise delay-2 max-w-2xl text-lg text-muted">{copy.hero.subtitle}</p>
               <div className="fade-rise delay-3 flex flex-wrap gap-4 pt-2">
@@ -131,7 +131,9 @@ export default function HomePage() {
                     <span className="marker-dot" style={{ top: '64%', left: '22%', animationDelay: '0.8s' }} />
                     <span className="marker-dot" style={{ top: '70%', left: '68%', animationDelay: '1.4s' }} />
                   </div>
-                  <div className="mt-6 text-xs uppercase tracking-[0.3em] text-subtle">Forcefield</div>
+                  <div className="mt-6 text-xs uppercase tracking-[0.3em] text-subtle">
+                    {copy.system.forcefieldLabel}
+                  </div>
                   <p className="mt-2 text-sm text-muted">{copy.system.items[0].desc}</p>
                 </div>
                 <div className="grid gap-4">

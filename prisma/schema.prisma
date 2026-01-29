@@ -91,6 +91,7 @@ model Quest {
   id          Int      @id @default(autoincrement())
   userId      Int
   parentGoalId Int?
+  parentQuestId Int?
   title       String
   description String?
   level       QuestLevel
@@ -102,6 +103,8 @@ model Quest {
 
   user User @relation(fields: [userId], references: [id])
   parentGoal Goal? @relation(fields: [parentGoalId], references: [id])
+  parentQuest Quest? @relation("QuestHierarchy", fields: [parentQuestId], references: [id])
+  subQuests Quest[] @relation("QuestHierarchy")
 }
 
 model Reflection {

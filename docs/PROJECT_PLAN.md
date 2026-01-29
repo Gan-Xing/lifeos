@@ -29,3 +29,7 @@ LifeOS helps users upgrade their identity and gamify their life through structur
 - Hash passwords (scrypt)
 - Signed session cookies
 - Require session for private data
+
+## Development Guidelines
+- Use the shared notification component (ToastProvider) for all notifications/prompts/modals.
+- Prefer system-level interrupt prompts over inline-only reminders.

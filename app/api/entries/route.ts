@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 import { getSessionUser } from '@/lib/server/authSession'
 import { prisma } from '@/lib/prisma'
 import { entrySchema } from '@/lib/validators/entry'
+import { generateFeedback } from '@/lib/ai/feedbackGenerator'
 
 export async function GET() {
   const session = await getSessionUser()
@@ -41,7 +42,20 @@ export async function POST(request: Request) {
       },
     })
 
-    return NextResponse.json({ entry })
+    const locale = payload.locale ?? 'en'
+    const draft = await generateFeedback(locale, payload)
+    const feedback = await prisma.feedback.create({
+      data: {
+        userId: session.id,
+        entryId: entry.id,
+        summary: draft.summary,
+        correction: draft.correction,
+        nextAction: draft.nextAction,
+        severity: draft.severity,
+      },
+    })
+
+    return NextResponse.json({ entry, feedback })
   } catch (error) {
     const message = error instanceof Error ? error.message : '保存失败'
     return NextResponse.json({ message }, { status: 400 })

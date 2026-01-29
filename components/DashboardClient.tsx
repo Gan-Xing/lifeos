@@ -13,7 +13,7 @@ export default function DashboardClient() {
   const copy = getEntriesCopy(locale)
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+    <div className="grid gap-8">
       <div className="glass-panel rounded-3xl p-8">
         <h2 className="font-display text-2xl text-aura">{copy.dashboard.formTitle}</h2>
         <p className="mt-2 text-sm text-muted">{copy.dashboard.formBody}</p>

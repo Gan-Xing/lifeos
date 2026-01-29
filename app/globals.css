@@ -27,6 +27,9 @@
   --shadow: rgba(0, 0, 0, 0.45);
   --anim-snow: rgba(213, 247, 255, 0.75);
   --anim-bubble: rgba(125, 230, 255, 0.45);
+  --toast-bg: linear-gradient(135deg, var(--surface), var(--panel));
+  --toast-text: var(--text);
+  --toast-backdrop: rgba(5, 10, 16, 0.55);
 }
 
 :root[data-theme='ember'] {
@@ -53,6 +56,9 @@
   --shadow: rgba(0, 0, 0, 0.5);
   --anim-snow: rgba(255, 235, 220, 0.8);
   --anim-bubble: rgba(255, 184, 142, 0.45);
+  --toast-bg: linear-gradient(135deg, var(--surface), var(--panel));
+  --toast-text: var(--text);
+  --toast-backdrop: rgba(18, 8, 6, 0.55);
 }
 
 :root[data-theme='arctic'] {
@@ -80,6 +86,9 @@
   --shadow: rgba(15, 23, 42, 0.12);
   --anim-snow: rgba(90, 130, 210, 0.75);
   --anim-bubble: rgba(170, 210, 255, 0.45);
+  --toast-bg: linear-gradient(135deg, var(--surface), var(--panel));
+  --toast-text: var(--text);
+  --toast-backdrop: rgba(15, 23, 42, 0.25);
 }
 
 :root[data-theme='ivory'] {
@@ -107,6 +116,9 @@
   --shadow: rgba(43, 36, 27, 0.12);
   --anim-snow: rgba(122, 175, 255, 0.7);
   --anim-bubble: rgba(173, 224, 255, 0.45);
+  --toast-bg: linear-gradient(135deg, var(--surface), var(--panel));
+  --toast-text: var(--text);
+  --toast-backdrop: rgba(43, 36, 27, 0.24);
 }
 
 body {
@@ -266,6 +278,23 @@ canvas {
 
 .fade-rise {
   animation: fade-rise 0.8s ease both;
+}
+
+.toast-card {
+  background: var(--toast-bg);
+  border-color: var(--toast-tone, var(--border));
+  color: var(--toast-text);
+  box-shadow: 0 28px 80px var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.toast-modal {
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-modal-backdrop {
+  background: var(--toast-backdrop);
 }
 
 .delay-1 {

@@ -42,7 +42,7 @@ export default function EntryForm({ onCreated }: EntryFormProps) {
       const res = await fetch('/api/entries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, locale }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -89,7 +89,7 @@ export default function EntryForm({ onCreated }: EntryFormProps) {
           placeholder={copy.form.narrativePlaceholder}
         />
       </label>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4">
         <label className="grid gap-2 text-sm text-muted">
           {copy.form.identityLabel}
           <input

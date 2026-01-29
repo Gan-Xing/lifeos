@@ -32,7 +32,7 @@ export default function ControlDock({ className = '' }: { className?: string }) 
     >
       <button
         type="button"
-        aria-label="Open settings"
+        aria-label={common.controls.settings}
         onClick={() => setOpen((prev) => !prev)}
         className="inline-flex items-center gap-2 rounded-full border border-border bg-[color:var(--panel)] px-3 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-muted transition hover:text-aura"
       >

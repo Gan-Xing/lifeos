@@ -1,9 +1,15 @@
 'use client'
 
 import { LocaleProvider } from '@/lib/usePreferredLocale'
-import { usePreferredTheme } from '@/lib/usePreferredTheme'
+import { ThemeProvider } from '@/lib/usePreferredTheme'
+import { ToastProvider } from '@/components/ToastProvider'
 
 export default function AppProviders({ children }: { children: React.ReactNode }) {
-  usePreferredTheme()
-  return <LocaleProvider>{children}</LocaleProvider>
+  return (
+    <ThemeProvider>
+      <LocaleProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </LocaleProvider>
+    </ThemeProvider>
+  )
 }

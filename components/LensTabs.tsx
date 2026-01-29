@@ -7,23 +7,36 @@ import { usePreferredLocale } from '@/lib/usePreferredLocale'
 
 const lensKeys = ['year', 'month', 'today'] as const
 
-type LensKey = (typeof lensKeys)[number]
+export type LensKey = (typeof lensKeys)[number]
 
-export default function LensTabs() {
+export default function LensTabs({
+  active,
+  onChange,
+}: {
+  active?: LensKey
+  onChange?: (next: LensKey) => void
+}) {
   const { locale } = usePreferredLocale('zh', locales)
   const copy = getDashboardCopy(locale)
-  const [active, setActive] = useState<LensKey>('today')
+  const [internal, setInternal] = useState<LensKey>('today')
+  const current = active ?? internal
 
   return (
     <div className="inline-flex items-center gap-2 rounded-full border border-border bg-[color:var(--panel)] p-2">
       {lensKeys.map((key) => {
         const label = copy.lens[key]
-        const isActive = active === key
+        const isActive = current === key
         return (
           <button
             key={key}
             type="button"
-            onClick={() => setActive(key)}
+            onClick={() => {
+              if (onChange) {
+                onChange(key)
+              } else {
+                setInternal(key)
+              }
+            }}
             className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.3em] transition ${
               isActive
                 ? 'bg-ember text-ink'

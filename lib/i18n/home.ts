@@ -12,6 +12,7 @@ export type HomeCopy = {
   hero: {
     eyebrow: string
     title: string
+    badge: string
     subtitle: string
     primaryCta: string
     secondaryCta: string
@@ -28,6 +29,7 @@ export type HomeCopy = {
   }
   system: {
     title: string
+    forcefieldLabel: string
     items: Array<{ title: string; desc: string }>
   }
   protocol: {
@@ -72,6 +74,7 @@ const copy: Record<Locale, HomeCopy> = {
     hero: {
       eyebrow: 'LifeOS',
       title: 'Upgrade your identity.\nGamify your life.',
+      badge: 'Identity Core',
       subtitle:
         'LifeOS helps you articulate who you are, detect drift, and act with AI-backed correction loops.',
       primaryCta: 'Start Reset',
@@ -93,6 +96,7 @@ const copy: Record<Locale, HomeCopy> = {
     },
     system: {
       title: 'The operating system for identity change',
+      forcefieldLabel: 'Champ de force',
       items: [
         {
           title: 'Identity Core',
@@ -187,6 +191,7 @@ const copy: Record<Locale, HomeCopy> = {
     hero: {
       eyebrow: 'LifeOS',
       title: 'Upgrade your identity.\nGamify your life.',
+      badge: '身份核心',
       subtitle:
         '“升级你的身份内核，游戏化你的人生。” LifeOS 帮你把初心写下来、看见偏离、在 AI 纠偏下持续行动。',
       primaryCta: '开始重置',
@@ -205,6 +210,7 @@ const copy: Record<Locale, HomeCopy> = {
     },
     system: {
       title: '身份转型的操作系统',
+      forcefieldLabel: '同心力场',
       items: [
         { title: '身份核心', desc: '定义你正在成为的那个人，并作为最高优先级信号。' },
         { title: '反愿景压力', desc: '把偏离的代价持续可见，驱动决断。' },
@@ -280,6 +286,7 @@ const copy: Record<Locale, HomeCopy> = {
     hero: {
       eyebrow: 'LifeOS',
       title: 'Améliore ton identité.\nTransforme ta vie en jeu.',
+      badge: 'Noyau d’identité',
       subtitle:
         "LifeOS t’aide à formuler qui tu es, détecter les dérives et agir grâce à des boucles d’ajustement IA.",
       primaryCta: 'Démarrer le reset',
@@ -302,6 +309,7 @@ const copy: Record<Locale, HomeCopy> = {
     },
     system: {
       title: 'Le système d’exploitation de la transformation',
+      forcefieldLabel: 'Forcefield',
       items: [
         { title: 'Noyau d’identité', desc: 'Définis qui tu deviens et fais-en le signal prioritaire.' },
         { title: 'Pression anti‑vision', desc: 'Garde le coût de la dérive visible pour agir.' },

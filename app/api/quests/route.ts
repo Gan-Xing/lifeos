@@ -13,6 +13,15 @@ export async function GET() {
   const quests = await prisma.quest.findMany({
     where: { userId: session.id },
     orderBy: { createdAt: 'desc' },
+    include: {
+      parentQuest: {
+        select: {
+          id: true,
+          title: true,
+          level: true,
+        },
+      },
+    },
   })
 
   return NextResponse.json({ quests })
@@ -32,6 +41,7 @@ export async function POST(request: Request) {
         title: payload.title,
         description: payload.description ?? null,
         level: payload.level,
+        parentQuestId: payload.parentQuestId ?? null,
         dueDate: payload.dueDate ? new Date(payload.dueDate) : null,
         xp: payload.xp ?? 0,
       },
